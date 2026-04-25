@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Executive Brief Builder | Paessler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pae-blue: #050f34;
+    --pae-cyan: #00AEEF;
+    --pae-grey: #e5e6e9;
+    --pae-grey-text: #5a6071;
+    --pae-white: #ffffff;
+    --pae-error: #d62a4a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300;
+    color: var(--pae-blue);
+    background: var(--pae-white);
+    line-height: 1.55;
+  }
+  header.site {
+    background: var(--pae-blue);
+    color: var(--pae-white);
+    padding: 28px 40px 60px;
+    border-bottom: 4px solid var(--pae-cyan);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-mark {
+    width: 38px; height: 38px;
+    border: 2px solid var(--pae-white);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+  }
+  .brand-mark svg { width: 24px; height: 24px; }
+  .brand-text {
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    font-size: 20px;
+    line-height: 1;
+  }
+  .brand-tag {
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--pae-white);
+    margin-top: 4px;
+    opacity: 0.85;
+  }
+  header.site h1 {
+    font-weight: 300;
+    color: var(--pae-cyan);
+    font-size: 38px;
+    margin: 36px 0 8px;
+    line-height: 1.1;
+  }
+  header.site p.lede {
+    font-weight: 300;
+    color: var(--pae-white);
+    font-size: 16px;
+    margin: 0;
+    max-width: 720px;
+    opacity: 0.9;
+  }
+  main {
+    max-width: 980px;
+    margin: -40px auto 80px;
+    padding: 0 40px;
+  }
+  .card {
+    background: var(--pae-white);
+    border: 1px solid var(--pae-grey);
+    box-shadow: 0 8px 28px rgba(5, 15, 52, 0.06);
+    padding: 36px 40px;
+    margin-bottom: 28px;
+  }
+  .card h2 {
+    font-weight: 500;
+    color: var(--pae-blue);
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+  }
+  .card .accent {
+    width: 40px; height: 3px;
+    background: var(--pae-cyan);
+    margin-bottom: 22px;
+  }
+  .card h3 {
+    font-weight: 500;
+    color: var(--pae-blue);
+    font-size: 22px;
+    margin: 0 0 4px;
+  }
+  .card .sub {
+    color: var(--pae-grey-text);
+    font-size: 14px;
+    margin: 0 0 26px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  @media (max-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    header.site { padding: 24px 20px 50px; }
+    header.site h1 { font-size: 28px; }
+    main { padding: 0 20px; }
+    .card { padding: 24px; }
+  }
+  label {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--pae-blue);
+    margin-bottom: 6px;
+  }
+  label .req { color: var(--pae-cyan); margin-left: 2px; }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--pae-blue);
+    background: var(--pae-white);
+    border: 1px solid var(--pae-grey);
+    padding: 11px 14px;
+    border-radius: 2px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--pae-cyan);
+    box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.18);
+  }
+  textarea { min-height: 80px; resize: vertical; }
+  .field { margin-bottom: 22px; }
+  .field:last-child { margin-bottom: 0; }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 720px) { .pain-grid { grid-template-columns: 1fr; } }
+  .pain {
+    border: 1px solid var(--pae-grey);
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .pain:hover { border-color: var(--pae-cyan); }
+  .pain input { margin-top: 3px; cursor: pointer; accent-color: var(--pae-cyan); }
+  .pain.selected {
+    border-color: var(--pae-cyan);
+    background: rgba(0, 174, 239, 0.04);
+  }
+  .pain.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .pain .pain-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--pae-blue);
+    margin: 0 0 2px;
+  }
+  .pain .pain-desc {
+    font-size: 13px;
+    color: var(--pae-grey-text);
+    margin: 0;
+    line-height: 1.4;
+  }
+  .pain-counter {
+    font-size: 13px;
+    color: var(--pae-grey-text);
+    margin-bottom: 18px;
+  }
+  .pain-counter b { color: var(--pae-cyan); font-weight: 500; }
+  .actions {
+    text-align: center;
+    padding: 30px 0 0;
+  }
+  button.cta {
+    background: var(--pae-cyan);
+    color: var(--pae-white);
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: none;
+    padding: 18px 44px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+  button.cta:hover { background: #0096cc; }
+  button.cta:active { transform: translateY(1px); }
+  button.cta:disabled { background: var(--pae-grey); color: var(--pae-grey-text); cursor: not-allowed; }
+  button.secondary {
+    background: var(--pae-white);
+    color: var(--pae-blue);
+    border: 1px solid var(--pae-blue);
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 2px;
+    margin-left: 14px;
+  }
+  button.secondary:hover { background: var(--pae-blue); color: var(--pae-white); }
+  .status {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--pae-grey-text);
+    min-height: 20px;
+  }
+  .status.success { color: var(--pae-cyan); font-weight: 500; }
+  .status.error { color: var(--pae-error); font-weight: 500; }
+  footer {
+    text-align: center;
+    color: var(--pae-grey-text);
+    font-size: 12px;
+    padding: 20px 40px 36px;
+  }
+  footer a { color: var(--pae-blue); text-decoration: none; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="7" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+        <line x1="12" y1="12" x2="17" y2="9" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-text">PAESSLER</div>
+      <div class="brand-tag">THE MONITORING EXPERTS</div>
+    </div>
+  </div>
+  <h1>Executive Brief Builder</h1>
+  <p class="lede">Capture your customer context, pick the three highest-impact PRTG pains, and generate a customer-ready Word document to package alongside your quote.</p>
+</header>
+
+<main>
+  <form id="brief-form" novalidate>
+
+    <!-- CUSTOMER INFO -->
+    <section class="card">
+      <h2>01 // Customer</h2>
+      <div class="accent"></div>
+      <h3>Account & opportunity context</h3>
+      <p class="sub">The basics about who you are selling to and what they care about.</p>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="company">Company name <span class="req">*</span></label>
+          <input id="company" name="company" type="text" required placeholder="e.g. Grain Millers, Inc." />
+        </div>
+        <div class="field">
+          <label for="industry">Industry <span class="req">*</span></label>
+          <input id="industry" name="industry" type="text" required placeholder="e.g. Food Manufacturing" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="currentSetup">Current monitoring setup</label>
+        <textarea id="currentSetup" name="currentSetup" placeholder="What are they using today? Tools, gaps, manual processes."></textarea>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="impact">Impact if not solved</label>
+          <textarea id="impact" name="impact" placeholder="Cost of inaction. Downtime, audit risk, lost revenue, customer impact."></textarea>
+        </div>
+        <div class="field">
+          <label for="systems">Key systems & services to monitor</label>
+          <textarea id="systems" name="systems" placeholder="Network, servers, OT, cloud, applications, sites, etc."></textarea>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="outcomes">Desired outcomes</label>
+          <textarea id="outcomes" name="outcomes" placeholder="What does success look like? Uptime targets, automation, visibility."></textarea>
+        </div>
+        <div class="field">
+          <label for="reporting">Reporting & alerting needs</label>
+          <textarea id="reporting" name="reporting" placeholder="Compliance reports, SLA proofs, alert channels, escalation rules."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAIN LIBRARY -->
+    <section class="card">
+      <h2>02 // Pain Points</h2>
+      <div class="accent"></div>
+      <h3>Pick the three problems PRTG will solve</h3>
+      <p class="sub">Select exactly three. Each becomes a page in the brief with a written challenge and PRTG's solution.</p>
+
+      <div class="pain-counter">Selected <b id="pain-count">0</b> of 3</div>
+      <div class="pain-grid" id="pain-grid"></div>
+    </section>
+
+    <!-- REP INFO -->
+    <section class="card">
+      <h2>03 // Sales Rep</h2>
+      <div class="accent"></div>
+      <h3>Your contact details for the brief</h3>
+      <p class="sub">These appear on the closing page along with the quote link.</p>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="repName">Your name <span class="req">*</span></label>
+          <input id="repName" name="repName" type="text" required placeholder="e.g. Dan Drees" />
+        </div>
+        <div class="field">
+          <label for="repTitle">Your title</label>
+          <input id="repTitle" name="repTitle" type="text" placeholder="e.g. VP Global Sales" />
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="repEmail">Email <span class="req">*</span></label>
+          <input id="repEmail" name="repEmail" type="email" required placeholder="you@paessler.com" />
+        </div>
+        <div class="field">
+          <label for="repPhone">Phone</label>
+          <input id="repPhone" name="repPhone" type="tel" placeholder="e.g. 214 578 6537" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="quoteLink">Quote link</label>
+        <input id="quoteLink" name="quoteLink" type="url" placeholder="https://shop.paessler.com/my/orders/..." />
+      </div>
+    </section>
+
+    <div class="actions">
+      <button type="submit" class="cta" id="submitBtn">Create Executive Brief</button>
+      <button type="button" class="secondary" id="resetBtn">Reset</button>
+      <div class="status" id="status"></div>
+    </div>
+  </form>
+</main>
+
+<footer>
+  &copy; 2026 Paessler GmbH &nbsp;//&nbsp; <a href="mailto:info@paessler.com">info@paessler.com</a> &nbsp;//&nbsp; <a href="https://www.paessler.com">www.paessler.com</a>
+</footer>
+
+<!-- Libraries: docx.js + FileSaver -->
+<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+<script>
+/* =========================================================
+   PAIN LIBRARY  -  pre-written PRTG challenges & solutions
+   ========================================================= */
+const PAIN_LIBRARY = [
+  {
+    key: 'blind-spots',
+    title: 'Blind Spots Across Facilities',
+    challenge: 'Disparate networks, servers, OT systems, and building infrastructure lack centralized monitoring. Issues hide until they escalate into outages.',
+    solution: 'A unified dashboard with 300+ sensor types monitors IT, OT, and building systems from a single pane of glass.',
+    industryContext: 'Centralized visibility across complex, distributed facilities with one dashboard for every site.'
+  },
+  {
+    key: 'reactive-ops',
+    title: 'Reactive Operations',
+    challenge: 'Problems are discovered by end users or workers on the floor rather than detected early by monitoring systems.',
+    solution: 'Proactive alerting via SMS, email, Microsoft Teams, or Slack notifies the right teams before minor issues become costly outages.',
+    industryContext: 'Real-time detection that closes the gap between failure and response.'
+  },
+  {
+    key: 'manual-compliance',
+    title: 'Manual Compliance Reporting',
+    challenge: 'Audit, regulatory, and certification cycles require traceability and uptime documentation that is currently produced by hand.',
+    solution: 'Automated scheduled reports generate audit-ready PDF and HTML documentation for every compliance cycle.',
+    industryContext: 'Repeatable reporting that turns audit prep from a project into a click.'
+  },
+  {
+    key: 'energy-waste',
+    title: 'Invisible Energy Waste',
+    challenge: 'No visibility into energy consumption patterns across facilities, making efficiency gains and ESG progress difficult to identify.',
+    solution: 'Per-zone energy and power monitoring reveals waste and supports ESG and sustainability reporting requirements.',
+    industryContext: 'Quantified consumption data feeds operational and sustainability decisions.'
+  },
+  {
+    key: 'network-outages',
+    title: 'Network Outages and Bottlenecks',
+    challenge: 'Slow or down networks drive user complaints, lost productivity, and missed service-level commitments.',
+    solution: 'Real-time bandwidth, flow analysis (NetFlow, sFlow, jFlow), and device health monitoring catch issues before users feel them.',
+    industryContext: 'Network performance is treated as a measured business asset, not a guess.'
+  },
+  {
+    key: 'server-health',
+    title: 'Server and Virtualization Health Gaps',
+    challenge: 'Server crashes, VM performance degradation, and resource exhaustion go undetected until services fail.',
+    solution: 'Deep server and hypervisor monitoring (CPU, RAM, disk, VMware, Hyper-V) with predictive thresholds catches early warning signs.',
+    industryContext: 'The compute layer becomes a forecasted system, not a reactive one.'
+  },
+  {
+    key: 'cloud-visibility',
+    title: 'Cloud and Hybrid Visibility Gaps',
+    challenge: 'Cloud and SaaS workloads are monitored separately from on-prem, creating blind spots between environments.',
+    solution: 'Unified cloud monitoring across AWS, Azure, Microsoft 365, and SaaS apps in the same console as on-prem infrastructure.',
+    industryContext: 'One view of every workload regardless of where it runs.'
+  },
+  {
+    key: 'iot-ot-sprawl',
+    title: 'IoT and OT Sprawl',
+    challenge: 'Industrial sensors, PLCs, and IoT devices use protocols traditional tools cannot read, leaving the OT layer dark.',
+    solution: 'Native MQTT, Modbus TCP, OPC UA, and SNMP support brings IT and OT into a single monitoring platform.',
+    industryContext: 'IT and OT are unified under one operating picture.'
+  },
+  {
+    key: 'alert-fatigue',
+    title: 'Alert Fatigue',
+    challenge: 'Too many alerts cause critical issues to be missed in the noise, eroding trust in the monitoring system itself.',
+    solution: 'Dependency-aware alerting, smart thresholds, and acknowledgment workflows surface only the alerts that matter.',
+    industryContext: 'Alerts become signal, not noise, restoring confidence in operations.'
+  },
+  {
+    key: 'incident-response',
+    title: 'Slow Incident Response',
+    challenge: 'High mean time to resolution because teams cannot quickly find root cause when something breaks.',
+    solution: 'Topology maps, dashboards, and historical data accelerate triage and root-cause analysis during live incidents.',
+    industryContext: 'Faster diagnosis cuts downtime and the dollar cost behind it.'
+  },
+  {
+    key: 'sla-proof',
+    title: 'No SLA Proof for Stakeholders',
+    challenge: 'No clean way to prove uptime and performance to internal stakeholders, customers, or partners.',
+    solution: 'Automated SLA reports give business stakeholders confidence and protect contractual commitments with hard data.',
+    industryContext: 'Service quality is documented, not anecdotal.'
+  },
+  {
+    key: 'tool-sprawl',
+    title: 'Multi-Tool Sprawl',
+    challenge: 'Multiple specialized monitoring tools cost too much and create blind spots between them.',
+    solution: 'One platform replaces three or four point tools, cutting license cost and consolidating data into a single source of truth.',
+    industryContext: 'Operational tooling consolidates around a single monitoring platform.'
+  },
+  {
+    key: 'app-performance',
+    title: 'Application Performance Issues',
+    challenge: 'Applications are slow but no one can pinpoint whether the network, server, or app itself is at fault.',
+    solution: 'HTTP, REST, database, and synthetic transaction sensors isolate root cause across the full stack.',
+    industryContext: 'End-user experience is observable end to end.'
+  },
+  {
+    key: 'cert-security',
+    title: 'Certificate and Security Hygiene',
+    challenge: 'Expired certificates and overlooked security indicators cause outages and audit failures.',
+    solution: 'Certificate, port, and security sensor monitoring provides early warning across the entire estate.',
+    industryContext: 'Security hygiene becomes a continuous check, not an annual review.'
+  },
+  {
+    key: 'remote-sites',
+    title: 'Remote Site Visibility',
+    challenge: 'Branch offices and remote sites operate as black boxes between physical visits.',
+    solution: 'Remote probes monitor distributed sites and feed back to a central server for unified oversight at headquarters.',
+    industryContext: 'Every site reports back to one central operations view.'
+  }
+];
+
+/* =========================================================
+   PAIN PICKER UI
+   ========================================================= */
+const painGrid = document.getElementById('pain-grid');
+const painCount = document.getElementById('pain-count');
+const MAX_PAINS = 3;
+
+PAIN_LIBRARY.forEach((p) => {
+  const label = document.createElement('label');
+  label.className = 'pain';
+  label.dataset.key = p.key;
+  label.innerHTML = `
+    <input type="checkbox" name="pain" value="${p.key}" />
+    <div>
+      <p class="pain-title">${p.title}</p>
+      <p class="pain-desc">${p.solution}</p>
+    </div>
+  `;
+  painGrid.appendChild(label);
+});
+
+painGrid.addEventListener('change', () => {
+  const checked = painGrid.querySelectorAll('input[name="pain"]:checked');
+  painCount.textContent = checked.length;
+  painGrid.querySelectorAll('.pain').forEach((el) => {
+    const cb = el.querySelector('input');
+    el.classList.toggle('selected', cb.checked);
+    if (!cb.checked && checked.length >= MAX_PAINS) {
+      el.classList.add('disabled');
+      cb.disabled = true;
+    } else {
+      el.classList.remove('disabled');
+      cb.disabled = false;
+    }
+  });
+});
+
+/* =========================================================
+   FORM SUBMIT  -  build .docx
+   ========================================================= */
+const form = document.getElementById('brief-form');
+const statusEl = document.getElementById('status');
+const submitBtn = document.getElementById('submitBtn');
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  form.reset();
+  painGrid.querySelectorAll('.pain').forEach((el) => {
+    el.classList.remove('selected', 'disabled');
+    el.querySelector('input').disabled = false;
+  });
+  painCount.textContent = '0';
+  statusEl.textContent = '';
+  statusEl.className = 'status';
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  statusEl.className = 'status';
+  statusEl.textContent = '';
+
+  const data = readForm();
+  const validation = validate(data);
+  if (validation.error) {
+    statusEl.classList.add('error');
+    statusEl.textContent = validation.error;
+    return;
+  }
+
+  submitBtn.disabled = true;
+  statusEl.textContent = 'Building your brief...';
+
+  try {
+    const blob = await buildDocx(data);
+    const fname = `Executive_Brief_${slug(data.company)}.docx`;
+    saveAs(blob, fname);
+    statusEl.classList.add('success');
+    statusEl.textContent = `Downloaded: ${fname}`;
+  } catch (err) {
+    console.error(err);
+    statusEl.classList.add('error');
+    statusEl.textContent = 'Something went wrong building the document. Open the browser console for details.';
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+function readForm() {
+  const fd = new FormData(form);
+  const selectedKeys = fd.getAll('pain');
+  const pains = selectedKeys
+    .map((k) => PAIN_LIBRARY.find((p) => p.key === k))
+    .filter(Boolean);
+  return {
+    company: (fd.get('company') || '').trim(),
+    industry: (fd.get('industry') || '').trim(),
+    currentSetup: (fd.get('currentSetup') || '').trim(),
+    impact: (fd.get('impact') || '').trim(),
+    systems: (fd.get('systems') || '').trim(),
+    outcomes: (fd.get('outcomes') || '').trim(),
+    reporting: (fd.get('reporting') || '').trim(),
+    repName: (fd.get('repName') || '').trim(),
+    repTitle: (fd.get('repTitle') || '').trim(),
+    repEmail: (fd.get('repEmail') || '').trim(),
+    repPhone: (fd.get('repPhone') || '').trim(),
+    quoteLink: (fd.get('quoteLink') || '').trim(),
+    pains
+  };
+}
+
+function validate(d) {
+  if (!d.company) return { error: 'Company name is required.' };
+  if (!d.industry) return { error: 'Industry is required.' };
+  if (!d.repName) return { error: 'Your name is required.' };
+  if (!d.repEmail) return { error: 'Your email is required.' };
+  if (d.pains.length !== 3) return { error: 'Pick exactly three pain points.' };
+  return { ok: true };
+}
+
+function slug(s) {
+  return (s || 'Customer').replace(/[^a-z0-9]+/gi, '_').replace(/^_|_$/g, '');
+}
+
+/* =========================================================
+   DOCX BUILDER
+   ========================================================= */
+async function buildDocx(d) {
+  const D = window.docx;
+  if (!D) throw new Error('docx library failed to load');
+
+  const PAE_BLUE = '050F34';
+  const PAE_CYAN = '00AEEF';
+  const PAE_GREY = 'E5E6E9';
+  const WHITE = 'FFFFFF';
+
+  // Helpers ------------------------------------------------
+  const text = (str, opts = {}) => new D.TextRun({
+    text: str || '',
+    font: 'Roboto',
+    color: opts.color || PAE_BLUE,
+    bold: !!opts.bold,
+    size: opts.size || 22, // half-points
+    ...opts.run
+  });
+
+  const para = (runs, opts = {}) => new D.Paragraph({
+    children: Array.isArray(runs) ? runs : [runs],
+    alignment: opts.align || D.AlignmentType.LEFT,
+    spacing: opts.spacing || { before: 0, after: 120 },
+    ...opts.extra
+  });
+
+  // Section header bar (dark blue background, cyan text)
+  const sectionHeaderBar = (titleStr) => new D.Table({
+    width: { size: 100, type: D.WidthType.PERCENTAGE },
+    borders: noBorders(),
+    rows: [
+      new D.TableRow({
+        children: [
+          new D.TableCell({
+            shading: { fill: PAE_BLUE, type: D.ShadingType.CLEAR, color: 'auto' },
+            margins: { top: 220, bottom: 220, left: 280, right: 280 },
+            children: [
+              new D.Paragraph({
+                children: [new D.TextRun({
+                  text: titleStr || '',
+                  font: 'Roboto',
+                  color: PAE_CYAN,
+                  size: 40,
+                })],
+                spacing: { before: 0, after: 0 }
+              })
+            ]
+          })
+        ]
+      })
+    ]
+  });
+
+  // Two-column challenge | solution table
+  const challengeSolutionTable = (challenge, solution) => new D.Table({
+    width: { size: 100, type: D.WidthType.PERCENTAGE },
+    columnWidths: [4500, 4500],
+    borders: noBorders(),
+    rows: [
+      new D.TableRow({
+        children: [
+          new D.TableCell({
+            margins: { top: 200, bottom: 80, left: 0, right: 200 },
+            children: [pillLabel('THE CHALLENGE', PAE_BLUE, WHITE)],
+            borders: noCellBorders()
+          }),
+          new D.TableCell({
+            margins: { top: 200, bottom: 80, left: 200, right: 0 },
+            children: [pillLabel('HOW PRTG SOLVES IT', PAE_CYAN, WHITE)],
+            borders: noCellBorders()
+          })
+        ]
+      }),
+      new D.TableRow({
+        children: [
+          new D.TableCell({
+            margins: { top: 60, bottom: 200, left: 0, right: 200 },
+            children: [
+              new D.Paragraph({
+                children: [text(challenge, { size: 22 })],
+                spacing: { before: 0, after: 0 }
+              })
+            ],
+            borders: noCellBorders()
+          }),
+          new D.TableCell({
+            margins: { top: 60, bottom: 200, left: 200, right: 0 },
+            children: [
+              new D.Paragraph({
+                children: [text(solution, { size: 22, bold: true })],
+                spacing: { before: 0, after: 0 }
+              })
+            ],
+            borders: noCellBorders()
+          })
+        ]
+      })
+    ]
+  });
+
+  // Pill-shaped label (used for THE CHALLENGE / HOW PRTG SOLVES IT)
+  function pillLabel(label, fill, fg) {
+    return new D.Paragraph({
+      children: [new D.TextRun({
+        text: '  ' + label + '  ',
+        font: 'Roboto',
+        color: fg,
+        bold: true,
+        size: 18,
+        shading: { type: D.ShadingType.CLEAR, color: 'auto', fill: fill }
+      })],
+      spacing: { before: 0, after: 120 }
+    });
+  }
+
+  // Industry context block (light grey background)
+  const industryContextBlock = (subhead, body) => new D.Table({
+    width: { size: 100, type: D.WidthType.PERCENTAGE },
+    borders: noBorders(),
+    rows: [
+      new D.TableRow({
+        children: [
+          new D.TableCell({
+            shading: { fill: PAE_GREY, type: D.ShadingType.CLEAR, color: 'auto' },
+            margins: { top: 220, bottom: 220, left: 320, right: 320 },
+            children: [
+              new D.Paragraph({
+                children: [new D.TextRun({
+                  text: 'INDUSTRY CONTEXT',
+                  font: 'Roboto',
+                  color: PAE_CYAN,
+                  bold: true,
+                  size: 16
+                })],
+                spacing: { before: 0, after: 60 }
+              }),
+              new D.Paragraph({
+                children: [text(subhead, { bold: true, size: 22 })],
+                spacing: { before: 0, after: 60 }
+              }),
+              new D.Paragraph({
+                children: [text(body, { size: 20 })],
+                spacing: { before: 0, after: 0 }
+              })
+            ]
+          })
+        ]
+      })
+    ]
+  });
+
+  function noBorders() {
+    const none = { style: D.BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+    return { top: none, bottom: none, left: none, right: none, insideHorizontal: none, insideVertical: none };
+  }
+  function noCellBorders() {
+    const none = { style: D.BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+    return { top: none, bottom: none, left: none, right: none };
+  }
+
+  const spacer = (h = 200) => new D.Paragraph({ children: [text('', { size: 12 })], spacing: { before: 0, after: h } });
+
+  const pageBreakPara = () => new D.Paragraph({ children: [new D.PageBreak()] });
+
+  // Build cover page ---------------------------------------
+  const execSummary = composeExecSummary(d);
+
+  const coverChildren = [
+    // Brand strip (dark blue band) at top with "PAESSLER"
+    brandBar(D, PAE_BLUE, PAE_CYAN, WHITE),
+    spacer(400),
+    // Eyebrow
+    para(
+      [text('EXECUTIVE BRIEF', { color: PAE_CYAN, bold: true, size: 28 })],
+      { align: D.AlignmentType.LEFT }
+    ),
+    // Big title
+    para(
+      [text(`PRTG Network Monitor for ${d.company}`, { size: 56, color: PAE_BLUE })],
+      { align: D.AlignmentType.LEFT, spacing: { before: 0, after: 160 } }
+    ),
+    // Cyan rule
+    cyanRule(D, PAE_CYAN),
+    spacer(240),
+    // Industry tag
+    para(
+      [text(d.industry.toUpperCase(), { bold: true, color: PAE_CYAN, size: 20 })],
+      { spacing: { before: 0, after: 200 } }
+    ),
+    // Executive summary
+    para([text(execSummary, { size: 24 })], { spacing: { before: 0, after: 240 } }),
+  ];
+
+  // Optional context blocks
+  const contextRows = [];
+  if (d.currentSetup) contextRows.push(['CURRENT MONITORING SETUP', d.currentSetup]);
+  if (d.systems) contextRows.push(['KEY SYSTEMS & SERVICES', d.systems]);
+  if (d.reporting) contextRows.push(['REPORTING & ALERTING NEEDS', d.reporting]);
+
+  if (contextRows.length) {
+    coverChildren.push(spacer(200));
+    contextRows.forEach(([k, v]) => {
+      coverChildren.push(
+        para([text(k, { color: PAE_CYAN, bold: true, size: 16 })], { spacing: { before: 0, after: 40 } }),
+        para([text(v, { size: 22 })], { spacing: { before: 0, after: 200 } })
+      );
+    });
+  }
+
+  // Build problem pages ------------------------------------
+  const problemChildren = [];
+  d.pains.forEach((p, idx) => {
+    problemChildren.push(pageBreakPara());
+    problemChildren.push(brandBar(D, PAE_BLUE, PAE_CYAN, WHITE));
+    problemChildren.push(spacer(360));
+    problemChildren.push(sectionHeaderBar(p.title));
+    problemChildren.push(spacer(280));
+    problemChildren.push(challengeSolutionTable(p.challenge, p.solution));
+    problemChildren.push(spacer(280));
+    problemChildren.push(industryContextBlock(d.industry, p.industryContext));
+  });
+
+  // Build closing page -------------------------------------
+  const closingChildren = [
+    pageBreakPara(),
+    brandBar(D, PAE_BLUE, PAE_CYAN, WHITE),
+    spacer(600),
+    para(
+      [text("Let's Get Started", { color: PAE_CYAN, size: 56 })],
+      { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 80 } }
+    ),
+    centeredCyanRule(D, PAE_CYAN),
+    spacer(400),
+  ];
+
+  if (d.outcomes) {
+    closingChildren.push(
+      para([text('YOUR DESIRED OUTCOMES', { color: PAE_CYAN, bold: true, size: 16 })],
+        { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 60 } }),
+      para([text(d.outcomes, { size: 22 })],
+        { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 320 } })
+    );
+  }
+
+  // Rep card
+  closingChildren.push(repCard(D, d, PAE_BLUE, PAE_CYAN, WHITE));
+  closingChildren.push(spacer(400));
+
+  // Quote link
+  if (d.quoteLink) {
+    closingChildren.push(
+      para([text('YOUR QUOTE', { color: PAE_CYAN, bold: true, size: 16 })],
+        { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 60 } }),
+      new D.Paragraph({
+        alignment: D.AlignmentType.CENTER,
+        spacing: { before: 0, after: 240 },
+        children: [
+          new D.ExternalHyperlink({
+            link: d.quoteLink,
+            children: [
+              new D.TextRun({
+                text: 'View your quote',
+                font: 'Roboto',
+                color: PAE_CYAN,
+                bold: true,
+                size: 24,
+                underline: { type: 'single', color: PAE_CYAN }
+              })
+            ]
+          })
+        ]
+      })
+    );
+  }
+
+  // Footer link
+  closingChildren.push(
+    new D.Paragraph({
+      alignment: D.AlignmentType.CENTER,
+      spacing: { before: 200, after: 0 },
+      children: [
+        new D.ExternalHyperlink({
+          link: 'https://www.paessler.com/prtg',
+          children: [
+            new D.TextRun({
+              text: 'paessler.com/prtg',
+              font: 'Roboto',
+              color: PAE_CYAN,
+              bold: true,
+              size: 22,
+              underline: { type: 'single', color: PAE_CYAN }
+            })
+          ]
+        })
+      ]
+    })
+  );
+
+  // Document with footer ----------------------------------
+  const footerPara = new D.Paragraph({
+    alignment: D.AlignmentType.LEFT,
+    children: [
+      new D.TextRun({
+        text: '© 2026 Paessler GmbH  //  info@paessler.com  //  www.paessler.com',
+        font: 'Roboto', color: '8A8E9A', size: 16
+      })
+    ]
+  });
+
+  const doc = new D.Document({
+    creator: 'Paessler Sales',
+    title: `Executive Brief - ${d.company}`,
+    styles: {
+      default: {
+        document: { run: { font: 'Roboto' } }
+      }
+    },
+    sections: [{
+      properties: {
+        page: {
+          margin: { top: 720, right: 720, bottom: 720, left: 720 }, // 0.5"
+          size: { orientation: D.PageOrientation.PORTRAIT }
+        }
+      },
+      headers: {},
+      footers: {
+        default: new D.Footer({ children: [footerPara] })
+      },
+      children: [
+        ...coverChildren,
+        ...problemChildren,
+        ...closingChildren
+      ]
+    }]
+  });
+
+  return await D.Packer.toBlob(doc);
+}
+
+/* ---------- DOCX helpers ---------- */
+function brandBar(D, blue, cyan, white) {
+  return new D.Table({
+    width: { size: 100, type: D.WidthType.PERCENTAGE },
+    borders: emptyBorders(D),
+    rows: [
+      new D.TableRow({
+        children: [
+          new D.TableCell({
+            shading: { fill: blue, type: D.ShadingType.CLEAR, color: 'auto' },
+            margins: { top: 180, bottom: 180, left: 240, right: 240 },
+            children: [
+              new D.Paragraph({
+                children: [
+                  new D.TextRun({ text: 'PAESSLER', font: 'Roboto', color: white, bold: true, size: 24 }),
+                  new D.TextRun({ text: '   //   ', font: 'Roboto', color: cyan, size: 18 }),
+                  new D.TextRun({ text: 'THE MONITORING EXPERTS', font: 'Roboto', color: white, size: 14 })
+                ],
+                spacing: { before: 0, after: 0 }
+              })
+            ],
+            borders: emptyCellBorders(D)
+          })
+        ]
+      })
+    ]
+  });
+}
+
+function cyanRule(D, cyan) {
+  return new D.Table({
+    width: { size: 1500, type: D.WidthType.DXA },
+    borders: emptyBorders(D),
+    rows: [
+      new D.TableRow({
+        height: { value: 40, rule: D.HeightRule.EXACT },
+        children: [new D.TableCell({
+          shading: { fill: cyan, type: D.ShadingType.CLEAR, color: 'auto' },
+          children: [new D.Paragraph({ children: [new D.TextRun({ text: '', size: 1 })] })],
+          borders: emptyCellBorders(D)
+        })]
+      })
+    ]
+  });
+}
+
+function centeredCyanRule(D, cyan) {
+  return new D.Paragraph({
+    alignment: D.AlignmentType.CENTER,
+    children: [new D.TextRun({
+      text: '\u2014\u2014\u2014\u2014\u2014\u2014',
+      color: cyan, bold: true, size: 28
+    })],
+    spacing: { before: 0, after: 0 }
+  });
+}
+
+function repCard(D, d, blue, cyan, white) {
+  const inner = [
+    new D.Paragraph({
+      alignment: D.AlignmentType.CENTER,
+      spacing: { before: 0, after: 80 },
+      children: [new D.TextRun({
+        text: d.repName, font: 'Roboto', color: white, bold: true, size: 36
+      })]
+    })
+  ];
+  if (d.repTitle) {
+    inner.push(new D.Paragraph({
+      alignment: D.AlignmentType.CENTER,
+      spacing: { before: 0, after: 120 },
+      children: [new D.TextRun({
+        text: d.repTitle, font: 'Roboto', color: cyan, size: 22
+      })]
+    }));
+  }
+  const contactRuns = [];
+  if (d.repEmail) contactRuns.push(new D.TextRun({ text: d.repEmail, font: 'Roboto', color: white, size: 20 }));
+  if (d.repEmail && d.repPhone) contactRuns.push(new D.TextRun({ text: '   //   ', font: 'Roboto', color: cyan, size: 20 }));
+  if (d.repPhone) contactRuns.push(new D.TextRun({ text: d.repPhone, font: 'Roboto', color: white, size: 20 }));
+  if (contactRuns.length) {
+    inner.push(new D.Paragraph({
+      alignment: D.AlignmentType.CENTER,
+      spacing: { before: 0, after: 0 },
+      children: contactRuns
+    }));
+  }
+
+  return new D.Table({
+    width: { size: 100, type: D.WidthType.PERCENTAGE },
+    borders: emptyBorders(D),
+    rows: [
+      new D.TableRow({
+        children: [
+          new D.TableCell({
+            shading: { fill: blue, type: D.ShadingType.CLEAR, color: 'auto' },
+            margins: { top: 360, bottom: 360, left: 360, right: 360 },
+            children: inner,
+            borders: emptyCellBorders(D)
+          })
+        ]
+      })
+    ]
+  });
+}
+
+function emptyBorders(D) {
+  const none = { style: D.BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+  return { top: none, bottom: none, left: none, right: none, insideHorizontal: none, insideVertical: none };
+}
+function emptyCellBorders(D) {
+  const none = { style: D.BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+  return { top: none, bottom: none, left: none, right: none };
+}
+
+/* =========================================================
+   Compose executive summary from form fields
+   ========================================================= */
+function composeExecSummary(d) {
+  const company = d.company || 'your organization';
+  const industry = d.industry ? d.industry.toLowerCase() : 'the business';
+  let painList = '';
+  if (d.pains.length) {
+    const verbs = d.pains.map((p) => p.title.toLowerCase());
+    if (verbs.length === 1) painList = verbs[0];
+    else if (verbs.length === 2) painList = verbs.join(' and ');
+    else painList = verbs.slice(0, -1).join(', ') + ', and ' + verbs.slice(-1);
+  }
+  const impact = d.impact ? ` ${stripPeriod(d.impact)}.` : '';
+  const outcomes = d.outcomes ? ` ${stripPeriod(d.outcomes)}.` : '';
+  return [
+    `As ${industry} operations scale and the cost of downtime climbs, the current approach to infrastructure monitoring at ${company} creates risk: ${painList || 'gaps in visibility, reactive operations, and manual reporting'}.`,
+    `${impact}`,
+    ` PRTG Network Monitor by Paessler delivers the unified, proactive visibility ${company} needs to protect uptime, automate compliance, and drive measurable outcomes.${outcomes}`
+  ].join('').replace(/\s+/g, ' ').trim();
+}
+function stripPeriod(s) { return (s || '').trim().replace(/[.!?]$/, ''); }
+</script>
+
+</body>
+</html>
