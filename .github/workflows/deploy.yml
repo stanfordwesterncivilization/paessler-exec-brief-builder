@@ -26,7 +26,15 @@ jobs:
 
       - name: Inject API key
         run: |
-          sed -i "s/__ANTHROPIC_API_KEY__/${{ secrets.ANTHROPIC_API_KEY }}/g" index.html
+          python3 -c "
+          import os
+          key = os.environ['ANTHROPIC_API_KEY']
+          content = open('index.html').read()
+          content = content.replace('__ANTHROPIC_API_KEY__', key)
+          open('index.html', 'w').write(content)
+          "
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
