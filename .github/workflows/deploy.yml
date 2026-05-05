@@ -28,7 +28,7 @@ jobs:
         run: |
           python3 -c "
           import os
-          key = os.environ['ANTHROPIC_API_KEY']
+          key = os.environ['ANTHROPIC_API_KEY'].strip()
           content = open('index.html').read()
           content = content.replace('__ANTHROPIC_API_KEY__', key)
           open('index.html', 'w').write(content)
