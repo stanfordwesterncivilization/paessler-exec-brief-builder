@@ -38,12 +38,10 @@
     gap: 14px;
   }
   .brand-mark {
-    width: 38px; height: 38px;
-    border: 2px solid var(--pae-white);
+    width: 40px; height: 40px;
     display: flex; align-items: center; justify-content: center;
-    border-radius: 4px;
   }
-  .brand-mark svg { width: 24px; height: 24px; }
+  .brand-mark svg { width: 40px; height: 40px; }
   .brand-text {
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -156,6 +154,42 @@
   textarea { min-height: 80px; resize: vertical; }
   .field { margin-bottom: 22px; }
   .field:last-child { margin-bottom: 0; }
+  /* Multi-select checkbox grids */
+  .check-group-label {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--pae-blue);
+    display: block;
+    margin: 0 0 10px;
+  }
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 26px;
+  }
+  @media (max-width: 720px) { .check-grid { grid-template-columns: 1fr; } }
+  .check-item {
+    border: 1px solid var(--pae-grey);
+    padding: 10px 14px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--pae-blue);
+    letter-spacing: 0;
+    text-transform: none;
+    margin: 0;
+    transition: border-color 0.12s ease, background 0.12s ease;
+    border-radius: 2px;
+  }
+  .check-item:hover { border-color: var(--pae-cyan); }
+  .check-item input[type="checkbox"] { cursor: pointer; accent-color: var(--pae-cyan); margin: 0; flex-shrink: 0; }
   .pain-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -257,10 +291,7 @@
 <header class="site">
   <div class="brand">
     <div class="brand-mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="7" fill="none" stroke="#ffffff" stroke-width="2.2"/>
-        <line x1="12" y1="12" x2="17" y2="9" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>
+      <img src="data:image/png;base64,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" alt="Paessler logo mark" style="width:40px;height:40px;display:block;" />
     </div>
     <div>
       <div class="brand-text">PAESSLER</div>
@@ -268,7 +299,7 @@
     </div>
   </div>
   <h1>Executive Brief Builder</h1>
-  <p class="lede">Capture your customer context, pick the three highest-impact PRTG pains, and generate a customer-ready Word document to package alongside your quote.</p>
+  <p class="lede">Select your customer's industry, check off what applies, pick their top 3 pain points, and generate a branded Word doc to package with your quote. Takes about 2 minutes.</p>
 </header>
 
 <main>
@@ -279,7 +310,7 @@
       <h2>01 // Customer</h2>
       <div class="accent"></div>
       <h3>Account & opportunity context</h3>
-      <p class="sub">The basics about who you are selling to and what they care about.</p>
+      <p class="sub">Fill in what you know — every answer makes the brief sharper.</p>
 
       <div class="grid-2">
         <div class="field">
@@ -288,35 +319,99 @@
         </div>
         <div class="field">
           <label for="industry">Industry <span class="req">*</span></label>
-          <input id="industry" name="industry" type="text" required placeholder="e.g. Food Manufacturing" />
+          <select id="industry" name="industry" required>
+            <option value="">— Select industry —</option>
+            <option>Healthcare</option>
+            <option>Manufacturing / Industrial</option>
+            <option>Energy &amp; Utilities</option>
+            <option>Education</option>
+            <option>Financial Services</option>
+            <option>Government / Public Sector</option>
+            <option>IT &amp; Telecommunications</option>
+            <option>MSP / Managed Services</option>
+            <option>Travel &amp; Transportation</option>
+            <option>Media &amp; Entertainment</option>
+            <option>Retail</option>
+            <option>Buildings / Facilities</option>
+            <option>Food &amp; Beverage</option>
+            <option>Consulting &amp; Services</option>
+            <option>Other</option>
+          </select>
         </div>
       </div>
 
-      <div class="field">
-        <label for="currentSetup">Current monitoring setup</label>
-        <textarea id="currentSetup" name="currentSetup" placeholder="What are they using today? Tools, gaps, manual processes."></textarea>
+      <span class="check-group-label">What are they monitoring with today? (check all that apply)</span>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="SolarWinds NPM" /> SolarWinds NPM</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="WhatsUp Gold" /> WhatsUp Gold</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Microsoft SCOM" /> Microsoft SCOM</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Nagios" /> Nagios</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Zabbix" /> Zabbix</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Prometheus / Grafana" /> Prometheus / Grafana</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Auvik" /> Auvik</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Datadog" /> Datadog</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Dynatrace" /> Dynatrace</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="ManageEngine OpManager" /> ManageEngine OpManager</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Vendor-specific tools (Cisco, HPE, Juniper, etc.)" /> Vendor-specific tools</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Custom scripts / manual checklists" /> Custom scripts / manual checklists</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="No formal monitoring in place" /> No formal monitoring in place</label>
+        <label class="check-item"><input type="checkbox" name="currentSetup" value="Other" /> Other</label>
       </div>
 
-      <div class="grid-2">
-        <div class="field">
-          <label for="impact">Impact if not solved</label>
-          <textarea id="impact" name="impact" placeholder="Cost of inaction. Downtime, audit risk, lost revenue, customer impact."></textarea>
-        </div>
-        <div class="field">
-          <label for="systems">Key systems & services to monitor</label>
-          <textarea id="systems" name="systems" placeholder="Network, servers, OT, cloud, applications, sites, etc."></textarea>
-        </div>
+      <span class="check-group-label">What do they need to monitor? (check all that apply)</span>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="systems" value="Network / switches / routers" /> Network / switches / routers</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="Servers / VMs / hypervisors" /> Servers / VMs / hypervisors</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="Cloud (AWS / Azure / Microsoft 365)" /> Cloud (AWS / Azure / Microsoft 365)</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="OT / SCADA / PLCs / industrial" /> OT / SCADA / PLCs / industrial</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="IoT / sensors / connected devices" /> IoT / sensors / connected devices</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="Applications / databases" /> Applications / databases</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="Remote sites / branches" /> Remote sites / branches</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="Environmental (temp / humidity / power / UPS)" /> Environmental (temp / humidity / power / UPS)</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="Medical devices / clinical systems" /> Medical devices / clinical systems</label>
+        <label class="check-item"><input type="checkbox" name="systems" value="Security cameras / access control" /> Security cameras / access control</label>
       </div>
 
-      <div class="grid-2">
-        <div class="field">
-          <label for="outcomes">Desired outcomes</label>
-          <textarea id="outcomes" name="outcomes" placeholder="What does success look like? Uptime targets, automation, visibility."></textarea>
-        </div>
-        <div class="field">
-          <label for="reporting">Reporting & alerting needs</label>
-          <textarea id="reporting" name="reporting" placeholder="Compliance reports, SLA proofs, alert channels, escalation rules."></textarea>
-        </div>
+      <span class="check-group-label">What does success look like? (check all that apply)</span>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Reduce unplanned downtime" /> Reduce unplanned downtime</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Cut mean time to resolution (MTTR)" /> Cut mean time to resolution (MTTR)</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Replace multiple monitoring tools with one" /> Replace multiple tools with one</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Automate compliance and audit reporting" /> Automate compliance / audit reporting</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Prove uptime SLA to stakeholders" /> Prove uptime SLA to stakeholders</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Unify IT and OT visibility" /> Unify IT and OT visibility</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Scale monitoring as infrastructure grows" /> Scale monitoring as we grow</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Monitor physical and environmental systems" /> Monitor physical / environmental systems</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Enable client visibility across accounts (MSP)" /> Client visibility across accounts (MSP)</label>
+        <label class="check-item"><input type="checkbox" name="outcomes" value="Reduce total monitoring cost" /> Reduce total monitoring cost</label>
+      </div>
+
+      <span class="check-group-label">Impact if not solved (check all that apply)</span>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="impact" value="Customers or end users discover outages before IT does" /> Customers find problems before IT does</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Production or operations halt due to IT failure" /> Production or operations halt</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Patient safety or clinical service at risk" /> Patient safety or clinical service at risk</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Revenue loss or SLA penalty exposure" /> Revenue loss or SLA penalty exposure</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Regulatory or compliance audit failure" /> Regulatory or compliance audit failure</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Security incident or data loss" /> Security incident or data loss</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Physical damage to hardware, stock, or equipment" /> Physical damage to hardware or stock</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="IT team stuck in manual daily checks instead of strategic work" /> IT team buried in manual daily checks</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Hours spent finding root cause during incidents" /> Hours wasted finding root cause</label>
+        <label class="check-item"><input type="checkbox" name="impact" value="Unable to justify IT budget or prove value to leadership" /> Can't justify IT spend to leadership</label>
+      </div>
+
+      <span class="check-group-label">Reporting &amp; alerting needs (check all that apply)</span>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="reporting" value="Email and SMS alerts to IT staff" /> Email and SMS alerts</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Microsoft Teams or Slack notifications" /> Microsoft Teams or Slack</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Mobile app push alerts for on-call engineers" /> Mobile app / on-call push alerts</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Automated SLA and uptime reports" /> Automated SLA and uptime reports</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Compliance and audit documentation" /> Compliance and audit documentation</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Executive or management dashboard" /> Executive or management dashboard</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Per-site or per-client dashboards" /> Per-site or per-client dashboards</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="On-call escalation and acknowledgment workflows" /> On-call escalation workflows</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Ticketing system integration (ServiceNow, ConnectWise, etc.)" /> Ticketing system integration</label>
+        <label class="check-item"><input type="checkbox" name="reporting" value="Scheduled capacity and trend reports" /> Scheduled capacity and trend reports</label>
       </div>
     </section>
 
@@ -325,7 +420,7 @@
       <h2>02 // Pain Points</h2>
       <div class="accent"></div>
       <h3>Pick the three problems PRTG will solve</h3>
-      <p class="sub">Select exactly three. Each becomes a page in the brief with a written challenge and PRTG's solution.</p>
+      <p class="sub">Select exactly three. Each becomes a dedicated page in the brief — pre-written challenge, PRTG solution, and real customer proof points from your industry.</p>
 
       <div class="pain-counter">Selected <b id="pain-count">0</b> of 3</div>
       <div class="pain-grid" id="pain-grid"></div>
@@ -388,109 +483,151 @@
    ========================================================= */
 const PAIN_LIBRARY = [
   {
-    key: 'blind-spots',
-    title: 'Blind Spots Across Facilities',
-    challenge: 'Disparate networks, servers, OT systems, and building infrastructure lack centralized monitoring. Issues hide until they escalate into outages.',
-    solution: 'A unified dashboard with 300+ sensor types monitors IT, OT, and building systems from a single pane of glass.',
-    industryContext: 'Centralized visibility across complex, distributed facilities with one dashboard for every site.'
+    key: 'tool-sprawl',
+    title: 'Multi-Tool Sprawl',
+    challenge: 'Multiple monitoring tools (Nagios, SCOM, SolarWinds, Zabbix, Prometheus) running in silos create blind spots between them, require constant retraining, and generate conflicting data with no single source of truth.',
+    solution: 'PRTG replaces three or four point tools with one unified platform — cutting license cost and giving operations a single pane of glass across the entire estate.',
+    industryContext: 'IT organizations running three to five monitoring tools spend more time correlating alerts across consoles than resolving the underlying issue. Fragmented tooling also creates coverage gaps — and those gaps are where outages hide. Consolidation is not just a cost play; it is a reliability play.'
   },
   {
     key: 'reactive-ops',
     title: 'Reactive Operations',
-    challenge: 'Problems are discovered by end users or workers on the floor rather than detected early by monitoring systems.',
-    solution: 'Proactive alerting via SMS, email, Microsoft Teams, or Slack notifies the right teams before minor issues become costly outages.',
-    industryContext: 'Real-time detection that closes the gap between failure and response.'
+    challenge: 'Problems are discovered by end users, customers, or workers on the floor rather than detected early. The IT team is always firefighting instead of preventing fires.',
+    solution: 'Proactive alerting via SMS, email, Microsoft Teams, or Slack notifies the right person before minor issues become outages — transforming operations from reactive to preventive.',
+    industryContext: 'When monitoring is passive, the help desk becomes the early warning system — and by the time a ticket opens, the impact has already reached the business. Organizations that shift to proactive monitoring consistently report faster response times, fewer escalations, and measurable reductions in downtime-related costs. The difference between reactive and proactive is not technology; it is configuration and commitment.'
   },
   {
-    key: 'manual-compliance',
-    title: 'Manual Compliance Reporting',
-    challenge: 'Audit, regulatory, and certification cycles require traceability and uptime documentation that is currently produced by hand.',
-    solution: 'Automated scheduled reports generate audit-ready PDF and HTML documentation for every compliance cycle.',
-    industryContext: 'Repeatable reporting that turns audit prep from a project into a click.'
+    key: 'multi-site-blind-spots',
+    title: 'Multi-Site Blind Spots',
+    challenge: 'Distributed locations, branch offices, and remote sites operate as black boxes. Without visibility, issues fester until a user or customer reports them — often hours or days too late.',
+    solution: 'PRTG remote probes monitor every site and feed data back to a central server, providing headquarters-level visibility across every location without a large on-site IT footprint.',
+    industryContext: 'Distributed organizations face a monitoring coverage gap that grows with every new site. Without centralized visibility, each location operates effectively unsupervised between physical visits — accumulating small issues that compound into larger failures. The infrastructure cost of ignoring remote sites is almost always higher than the cost of monitoring them.'
   },
   {
-    key: 'energy-waste',
-    title: 'Invisible Energy Waste',
-    challenge: 'No visibility into energy consumption patterns across facilities, making efficiency gains and ESG progress difficult to identify.',
-    solution: 'Per-zone energy and power monitoring reveals waste and supports ESG and sustainability reporting requirements.',
-    industryContext: 'Quantified consumption data feeds operational and sustainability decisions.'
+    key: 'iot-ot-convergence',
+    title: 'IT/OT Convergence Gap',
+    challenge: 'Industrial sensors, PLCs, SCADA systems, and OT devices use protocols (Modbus, OPC UA, MQTT) that traditional IT monitoring tools cannot read — leaving the operational technology layer dark and unprotected.',
+    solution: 'PRTG\'s native Modbus TCP, OPC UA, MQTT, and SNMP support brings IT and OT into one monitoring platform, giving operations a unified view of every system from the factory floor to the server room.',
+    industryContext: 'As operational technology connects to corporate networks, the attack surface and failure surface both expand — yet most IT monitoring tools were designed before OT visibility was a requirement. Organizations without unified IT/OT monitoring are blind to some of their most operationally critical systems, where a single undetected failure can halt production or trigger a safety event. The convergence of IT and OT is not a future trend; it is the current operating reality.'
   },
   {
-    key: 'network-outages',
-    title: 'Network Outages and Bottlenecks',
-    challenge: 'Slow or down networks drive user complaints, lost productivity, and missed service-level commitments.',
-    solution: 'Real-time bandwidth, flow analysis (NetFlow, sFlow, jFlow), and device health monitoring catch issues before users feel them.',
-    industryContext: 'Network performance is treated as a measured business asset, not a guess.'
+    key: 'open-source-burden',
+    title: 'Open-Source Tool Maintenance Burden',
+    challenge: 'Nagios, Zabbix, and Prometheus require specialized engineering to configure, maintain, and scale. When the expert leaves, institutional knowledge leaves with them — and the tool starts to erode.',
+    solution: 'PRTG is a fully supported, commercial-grade platform with 300+ built-in sensor types, an intuitive interface, and professional support — no plugin archaeology required.',
+    industryContext: 'Open-source monitoring tools are powerful in the right hands — but those hands are rare, expensive to retain, and often the only people who understand the configuration. When the engineer who built the environment leaves, the tool degrades faster than the infrastructure it monitors. Supported commercial platforms eliminate single points of knowledge failure and shift the maintenance burden back to the vendor where it belongs.'
   },
   {
-    key: 'server-health',
-    title: 'Server and Virtualization Health Gaps',
-    challenge: 'Server crashes, VM performance degradation, and resource exhaustion go undetected until services fail.',
-    solution: 'Deep server and hypervisor monitoring (CPU, RAM, disk, VMware, Hyper-V) with predictive thresholds catches early warning signs.',
-    industryContext: 'The compute layer becomes a forecasted system, not a reactive one.'
+    key: 'environmental-monitoring',
+    title: 'Environmental & Physical Infrastructure Risk',
+    challenge: 'Temperature spikes, humidity excursions, power fluctuations, and UPS failures go undetected until hardware fails or inventory is lost. Physical infrastructure is the last layer to get monitoring attention — until something expensive goes wrong.',
+    solution: 'PRTG monitors temperature, humidity, power consumption, UPS status, and generator availability with threshold alerts that catch environmental risk before hardware fails or stock is lost.',
+    industryContext: 'Physical infrastructure failures do not announce themselves. By the time a device fails from heat, moisture, or power instability, the cost is hardware replacement plus unplanned downtime plus recovery labor. Environmental monitoring is consistently the lowest-cost way to protect the highest-value assets — and the organizations most likely to suffer an avoidable physical failure are the ones that assume environmental conditions are someone else\'s problem.'
   },
   {
-    key: 'cloud-visibility',
-    title: 'Cloud and Hybrid Visibility Gaps',
-    challenge: 'Cloud and SaaS workloads are monitored separately from on-prem, creating blind spots between environments.',
-    solution: 'Unified cloud monitoring across AWS, Azure, Microsoft 365, and SaaS apps in the same console as on-prem infrastructure.',
-    industryContext: 'One view of every workload regardless of where it runs.'
+    key: 'healthcare-medical-devices',
+    title: 'Medical Device & Clinical System Risk',
+    challenge: 'Ventilators, infusion pumps, PACS, electronic health record systems, and other clinical infrastructure are often invisible to IT monitoring. A failure during a procedure or at peak capacity directly puts patients at risk.',
+    solution: 'PRTG supports HL7 and DICOM healthcare protocols and monitors clinical networks alongside standard IT, giving hospital IT teams complete visibility across the care environment.',
+    industryContext: 'Clinical environments operate at the intersection of IT availability and patient outcomes. A server hosting the electronic health record, a switch connecting the imaging system, or a device on an unmonitored subnet represents both an IT risk and a patient safety risk. Regulatory frameworks increasingly require demonstrable monitoring coverage of clinical infrastructure — treating medical devices as IT-exempt is no longer an acceptable position.'
   },
   {
-    key: 'iot-ot-sprawl',
-    title: 'IoT and OT Sprawl',
-    challenge: 'Industrial sensors, PLCs, and IoT devices use protocols traditional tools cannot read, leaving the OT layer dark.',
-    solution: 'Native MQTT, Modbus TCP, OPC UA, and SNMP support brings IT and OT into a single monitoring platform.',
-    industryContext: 'IT and OT are unified under one operating picture.'
+    key: 'msp-client-visibility',
+    title: 'MSP Client Visibility at Scale',
+    challenge: 'Managing monitoring across dozens of customer environments with separate tools is unsustainable. Onboarding a new client takes too long, alert noise is high, and proving SLA compliance is a manual exercise.',
+    solution: 'PRTG\'s remote probe architecture deploys monitoring at each client site and feeds data back to a central server, enabling per-client dashboards, alert routing, and SLA reporting from one platform.',
+    industryContext: 'Managed service providers face a structural tension: client count drives revenue, but monitoring complexity per client erodes margin. Tools designed for single-organization use do not scale to multi-tenant environments without significant engineering overhead. MSPs that cannot produce a client uptime report on demand are competing on trust alone — and trust has a short shelf life when a client asks for proof.'
+  },
+  {
+    key: 'cloud-hybrid-gaps',
+    title: 'Cloud & Hybrid Infrastructure Blind Spots',
+    challenge: 'Cloud and SaaS workloads are monitored in separate consoles from on-premises infrastructure. When an incident spans both environments — which is almost always — the root cause is invisible.',
+    solution: 'PRTG unifies cloud monitoring (AWS, Azure, Microsoft 365) with on-premises infrastructure in a single console, so every workload is visible regardless of where it runs.',
+    industryContext: 'Hybrid architectures create a monitoring gap that neither cloud-native tools nor legacy on-premises platforms were built to close on their own. When an application performs poorly, the cause could be anywhere across a chain spanning WAN, on-premises compute, cloud workloads, and SaaS dependencies. Without unified visibility, every incident starts with time-consuming console-switching before the real troubleshooting can begin.'
   },
   {
     key: 'alert-fatigue',
-    title: 'Alert Fatigue',
-    challenge: 'Too many alerts cause critical issues to be missed in the noise, eroding trust in the monitoring system itself.',
-    solution: 'Dependency-aware alerting, smart thresholds, and acknowledgment workflows surface only the alerts that matter.',
-    industryContext: 'Alerts become signal, not noise, restoring confidence in operations.'
+    title: 'Alert Fatigue & Poor Escalation',
+    challenge: 'When every event triggers an alert, teams stop trusting the monitoring system. Critical incidents get buried in noise, on-call engineers burn out, and response times climb.',
+    solution: 'PRTG\'s dependency-aware alerting, smart thresholds, and acknowledgment workflows surface only alerts that matter — and integrations with Derdack, PagerDuty, Teams, and Slack ensure the right person is notified instantly.',
+    industryContext: 'A monitoring system that generates excessive alerts stops being trusted — and when trust goes, teams start ignoring it. Alert fatigue is a systemic risk: the higher the volume, the lower the probability a critical notification gets acted on before it becomes an outage. Effective monitoring is not about more alerts; it is about the right alerts reaching the right people at the right time through the right channel.'
   },
   {
-    key: 'incident-response',
-    title: 'Slow Incident Response',
-    challenge: 'High mean time to resolution because teams cannot quickly find root cause when something breaks.',
-    solution: 'Topology maps, dashboards, and historical data accelerate triage and root-cause analysis during live incidents.',
-    industryContext: 'Faster diagnosis cuts downtime and the dollar cost behind it.'
+    key: 'network-performance',
+    title: 'Network Performance & Bandwidth Visibility',
+    challenge: 'Without flow analysis and bandwidth monitoring, IT teams can\'t tell whether slowness is a device issue, a capacity problem, or a traffic spike — so troubleshooting becomes guesswork.',
+    solution: 'PRTG\'s built-in NetFlow, sFlow, and jFlow analysis combined with SNMP device monitoring provides real-time bandwidth utilization, traffic baselines, and early warning of congestion.',
+    industryContext: 'Network degradation rarely presents as a hard failure — it presents as slow applications, dropped calls, and frustrated users who raise tickets that point everywhere except the real cause. Without traffic baselines and real-time flow analysis, network troubleshooting is driven by anecdote rather than evidence. Bandwidth visibility converts network management from a reactive discipline into a measured one.'
   },
   {
-    key: 'sla-proof',
+    key: 'slow-mttr',
+    title: 'High Mean Time to Resolution (MTTR)',
+    challenge: 'When something breaks, engineers spend more time finding the root cause than fixing it. Without topology maps and historical data, every incident starts from scratch.',
+    solution: 'PRTG\'s network maps, topology views, and 30-day historical data enable rapid root-cause analysis — so teams fix problems faster and spend less time on post-mortems.',
+    industryContext: 'Mean time to resolution is one of the most direct measures of IT operational maturity — and one of the easiest to improve with the right tooling. Organizations with topology maps, historical trending, and correlated alerting consistently cut MTTR by 50% or more. Every minute shaved off the average incident resolution has a direct and calculable dollar value to the business.'
+  },
+  {
+    key: 'compliance-reporting',
+    title: 'Manual Compliance & Audit Reporting',
+    challenge: 'Audit, regulatory, and certification cycles require documented uptime, performance history, and change logs — all of which are currently produced by hand, taking hours per cycle and introducing error.',
+    solution: 'PRTG\'s automated scheduled reports generate audit-ready PDF and HTML documentation at any interval, turning a multi-day project into a scheduled click.',
+    industryContext: 'Compliance reporting is a recurring cost that compounds over time: each audit cycle requires the same manual effort as the last. Organizations in regulated industries face escalating documentation requirements that manual processes simply cannot scale to meet. Automated monitoring with scheduled reporting turns each audit cycle from a project into a printout.'
+  },
+  {
+    key: 'server-vm-health',
+    title: 'Server & Virtualization Health Gaps',
+    challenge: 'Server crashes, VM resource exhaustion, and hypervisor performance degradation go undetected until services fail — by which point the impact has already reached users.',
+    solution: 'Deep server and hypervisor monitoring (CPU, RAM, disk, VMware, Hyper-V) with predictive thresholds catches early warning signs and triggers automated remediation scripts before users notice.',
+    industryContext: 'Modern virtualized environments fail in ways physical hardware never did — resource contention, snapshot sprawl, and misconfigured limits can degrade performance across an entire host without a single hardware alert firing. Proactive monitoring of hypervisors, resource pools, and individual VMs converts unpredictable degradation into measurable, forecastable trends that IT can act on well before users notice.'
+  },
+  {
+    key: 'no-sla-proof',
     title: 'No SLA Proof for Stakeholders',
-    challenge: 'No clean way to prove uptime and performance to internal stakeholders, customers, or partners.',
-    solution: 'Automated SLA reports give business stakeholders confidence and protect contractual commitments with hard data.',
-    industryContext: 'Service quality is documented, not anecdotal.'
+    challenge: 'When leadership, customers, or segulators ask for uptime proof, the answer is a manual spreadsheet — or worse, silence. Without automated data collection, SLA commitments are faith-based.',
+    solution: 'PRTG\'s SLA reporting module produces stakeholder-ready uptime and performance reports on any schedule, turning contractual commitments into documented, defensible records.',
+    industryContext: 'Service level commitments mean nothing without the data to back them up. As IT takes on more business-critical workloads, the expectation from leadership, customers, and auditors is not just that systems are up — it is that IT can prove it on demand. Organizations that cannot produce an uptime report at a moment\'s notice are operating on faith, and faith is a poor foundation for a service agreement.'
   },
   {
-    key: 'tool-sprawl',
-    title: 'Multi-Tool Sprawl',
-    challenge: 'Multiple specialized monitoring tools cost too much and create blind spots between them.',
-    solution: 'One platform replaces three or four point tools, cutting license cost and consolidating data into a single source of truth.',
-    industryContext: 'Operational tooling consolidates around a single monitoring platform.'
+    key: 'iot-sensor-sprawl',
+    title: 'IoT & Sensor Sprawl Without Visibility',
+    challenge: 'Connected devices — from IP cameras and access controllers to environmental sensors and smart meters — multiply faster than monitoring can keep up, creating a growing attack surface with zero observability.',
+    solution: 'PRTG scales to monitor hundreds of thousands of IoT endpoints via SNMP, REST, MQTT, and custom sensors, centralizing device health and alert management regardless of manufacturer or protocol.',
+    industryContext: 'IoT devices multiply faster than monitoring coverage expands. Each unmonitored endpoint is a potential failure point, a potential security gap, and a potential compliance risk. As device counts grow into the thousands and protocols fragment across vendors, the only sustainable approach is a monitoring platform that natively speaks the same languages as the devices — not one that requires custom integration for every new manufacturer.'
+  },
+  {
+    key: 'scaling-limits',
+    title: 'Hitting Monitoring Scale Limits',
+    challenge: 'Growth means more devices, more sites, more cloud workloads — but the existing monitoring platform hits its sensor ceiling or becomes too slow to be useful, forcing expensive tooling decisions.',
+    solution: 'PRTG Enterprise Monitor scales horizontally across multiple probes and servers, supporting hundreds of thousands of sensors with no per-device licensing — so monitoring scales as fast as the business does.',
+    industryContext: 'Monitoring tools chosen for a 200-device environment rarely survive a 2,000-device environment intact. As infrastructure grows, per-device licensing costs climb, performance degrades, and the tool that once solved the problem becomes the bottleneck. Organizations that outpace their monitoring platform face an uncomfortable choice: constrain growth or accept blind spots. Neither is an acceptable answer.'
   },
   {
     key: 'app-performance',
-    title: 'Application Performance Issues',
-    challenge: 'Applications are slow but no one can pinpoint whether the network, server, or app itself is at fault.',
-    solution: 'HTTP, REST, database, and synthetic transaction sensors isolate root cause across the full stack.',
-    industryContext: 'End-user experience is observable end to end.'
+    title: 'Application & Service Performance Blind Spots',
+    challenge: 'Applications are slow or unavailable, but IT can\'t pinpoint whether the problem is the network, the server, the database, or the application itself — so users wait while engineers guess.',
+    solution: 'HTTP, REST, database, and synthetic transaction sensors in PRTG isolate root cause across the full stack, from the WAN circuit to the application response time.',
+    industryContext: 'When an application is slow, the instinct is to blame the network — but the truth is usually more nuanced. Without end-to-end visibility from the circuit to the application response, isolating root cause means guessing and testing in sequence, each step adding minutes or hours to the outage window. Application-aware monitoring collapses the diagnosis window from hours to minutes.'
   },
   {
-    key: 'cert-security',
-    title: 'Certificate and Security Hygiene',
-    challenge: 'Expired certificates and overlooked security indicators cause outages and audit failures.',
-    solution: 'Certificate, port, and security sensor monitoring provides early warning across the entire estate.',
-    industryContext: 'Security hygiene becomes a continuous check, not an annual review.'
+    key: 'energy-visibility',
+    title: 'Energy & Sustainability Visibility',
+    challenge: 'Rising energy costs and ESG reporting requirements demand data that most IT and facilities teams simply don\'t have — consumption is billed in aggregate but never measured at the device or lone level.',
+    solution: 'PRTG\'s power and energy sensors measure consumption per device, per rack, or per zone — turning energy data into actionable optimization intelligence and ESG reporting evidence.',
+    industryContext: 'Energy is a significant and growing operational cost for any organization running on-premises infrastructure — and it is one of the few costs that monitoring can directly reduce. Organizations without device-level and zone-level consumption data cannot optimize spend, cannot demonstrate ESG progress to stakeholders, and cannot make defensible decisions about hardware refresh or data center investment.'
   },
   {
-    key: 'remote-sites',
-    title: 'Remote Site Visibility',
-    challenge: 'Branch offices and remote sites operate as black boxes between physical visits.',
-    solution: 'Remote probes monitor distributed sites and feed back to a central server for unified oversight at headquarters.',
-    industryContext: 'Every site reports back to one central operations view.'
+    key: 'data-center-risk',
+    title: 'Data Center Downtime Risk',
+    challenge: 'Physical data center infrastructure — power distribution, cooling, environmental controls, and access systems — is often unmonitored until something fails, at which point the damage is already done.',
+    solution: 'PRTG monitors PDUs, UPS units, CCTV, access control, cooling systems, and environmental sensors alongside IT infrastructure, giving data center operators complete physical and logical visibility.',
+    industryContext: 'Data center failures follow a predictable pattern: the early warning signs are present long before the failure, but without the right sensors and monitoring, nobody sees them until it is too late. Power distribution anomalies, cooling inefficiencies, and humidity drift are all detectable and all preventable. Physical infrastructure monitoring is the last line of defense before costly hardware becomes unplanned scrap.'
+  },
+  {
+    key: 'remote-site-visibility',
+    title: 'Remote Site & Branch Office Visibility',
+    challenge: 'Branch offices and remote facilities operate as black boxes between physical visits. Issues build undetected, and the first sign is a user complaint — not a monitoring alert.',
+    solution: 'PRTG remote probes install at any site with internet connectivity, monitor local infrastructure independently, and feed data back to a central PRTG server — giving headquarters visibility without on-site IT staff.',
+    industryContext: 'Remote sites create an operational coverage gap that tends to be invisible until it is expensive. Without local monitoring feeding back to a central platform, branch infrastructure operates in isolation — and isolated infrastructure fails in isolation, typically discovered by the people who depend on it rather than the IT team responsible for it. Every unmonitored site is a liability waiting to become an incident.'
   }
 ];
 
@@ -532,6 +669,117 @@ painGrid.addEventListener('change', () => {
 });
 
 /* =========================================================
+   ANTHROPIC API CONFIG
+   Replace the value below with your Paessler API key from
+   https://console.anthropic.com
+   ========================================================= */
+const ANTHROPIC_API_KEY = '';
+
+/* =========================================================
+   AI PROSE GENERATOR
+   Calls Claude API to write executive-quality narrative from
+   the form selections. Returns { execParagraphs, closing }.
+   ========================================================= */
+async function generateProse(d) {
+  const painTitles = d.pains.map(p => p.title).join(', ');
+  const painChallenges = d.pains.map(p => `- ${p.title}: ${p.challenge}`).join('\n');
+
+  const prompt = `You are writing an executive brief for a B2B sales rep at Paessler, makers of PRTG Network Monitor — a unified infrastructure monitoring platform used by 500,000+ installations worldwide.
+
+CUSTOMER CONTEXT:
+- Company: ${d.company}
+- Industry: ${d.industry}
+- Current monitoring tools: ${d.currentSetup || 'Not specified'}
+- Infrastructure in scope: ${d.systems || 'Not specified'}
+- Top pain points selected by the sales rep: ${painTitles}
+- Business risk if unresolved: ${d.impact || 'Not specified'}
+- Desired outcomes: ${d.outcomes || 'Not specified'}
+- Reporting and alerting needs: ${d.reporting || 'Not specified'}
+
+Pain point detail (for context only — do not quote verbatim):
+${painChallenges}
+
+YOUR TASK:
+Write two pieces of content for a polished executive brief.
+
+1. EXECUTIVE SUMMARY: Three paragraphs for the cover page.
+   - Paragraph 1 (2-3 sentences): ${d.company}'s environment, what they manage, and why continuous visibility matters for their business.
+   - Paragraph 2 (3-4 sentences): What is broken today — their current tools and why those tools fall short, the specific pain points this creates, and the real business consequences if nothing changes. Be specific and direct.
+   - Paragraph 3 (2-3 sentences): How PRTG addresses these gaps and what outcomes ${d.company} can expect. Close with a forward-looking statement about what their team will be able to do that they cannot do today.
+
+2. CLOSING STATEMENT: Two sentences for the final page. Action-oriented. References specific outcomes. Gives the reader a clear reason to take the next step.
+
+WRITING RULES:
+- No em dashes. Use commas or restructure the sentence.
+- No bullet points anywhere.
+- No hollow phrases: "game-changer", "best-in-class", "seamlessly", "leverage", "holistic", "robust".
+- Executive tone — confident, specific, credible. Write like a trusted advisor, not a brochure.
+- Reference ${d.company} by name at least twice across the three paragraphs.
+- Do not start any sentence with "I".
+- Do not use passive voice if active voice is possible.
+- Each paragraph should be self-contained and readable on its own.
+
+RESPONSE FORMAT — use these exact markers, nothing else:
+EXEC_P1_START
+[paragraph 1 text]
+EXEC_P1_END
+EXEC_P2_START
+[paragraph 2 text]
+EXEC_P2_END
+EXEC_P3_START
+[paragraph 3 text]
+EXEC_P3_END
+CLOSING_START
+[closing statement text]
+CLOSING_END`;
+
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 1200,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(`API error ${response.status}: ${err.error?.message || response.statusText}`);
+  }
+
+  const json = await response.json();
+  const raw = json.content[0].text;
+
+  // Parse the structured response
+  const extract = (startTag, endTag) => {
+    const start = raw.indexOf(startTag);
+    const end = raw.indexOf(endTag);
+    if (start === -1 || end === -1) return '';
+    return raw.slice(start + startTag.length, end).trim();
+  };
+
+  const p1 = extract('EXEC_P1_START', 'EXEC_P1_END');
+  const p2 = extract('EXEC_P2_START', 'EXEC_P2_END');
+  const p3 = extract('EXEC_P3_START', 'EXEC_P3_END');
+  const closing = extract('CLOSING_START', 'CLOSING_END');
+
+  if (!p1 || !p2 || !p3) {
+    throw new Error('Prose generation returned incomplete output. Please try again.');
+  }
+
+  return {
+    execParagraphs: [p1, p2, p3],
+    closing: closing || `The next step is a live demonstration configured around ${d.company}'s specific environment. Reach out to schedule your personalized PRTG walkthrough.`
+  };
+}
+
+/* =========================================================
    FORM SUBMIT  -  build .docx
    ========================================================= */
 const form = document.getElementById('brief-form');
@@ -563,10 +811,17 @@ form.addEventListener('submit', async (e) => {
   }
 
   submitBtn.disabled = true;
-  statusEl.textContent = 'Building your brief...';
 
   try {
-    const blob = await buildDocx(data);
+    // Step 1: Generate AI prose
+    statusEl.textContent = 'Writing your brief with AI...';
+    const prose = await generateProse(data);
+
+    // Step 2: Build the Word document
+    statusEl.textContent = 'Building document...';
+    const blob = await buildDocx(data, prose);
+
+    // Step 3: Download
     const fname = `Executive_Brief_${slug(data.company)}.docx`;
     saveAs(blob, fname);
     statusEl.classList.add('success');
@@ -574,7 +829,13 @@ form.addEventListener('submit', async (e) => {
   } catch (err) {
     console.error(err);
     statusEl.classList.add('error');
-    statusEl.textContent = 'Something went wrong building the document. Open the browser console for details.';
+    if (err.message.includes('401') || err.message.includes('403')) {
+      statusEl.textContent = 'API key invalid or missing. Update ANTHROPIC_API_KEY in the source file.';
+    } else if (err.message.includes('API error')) {
+      statusEl.textContent = `AI service error: ${err.message}`;
+    } else {
+      statusEl.textContent = 'Something went wrong. Open the browser console for details.';
+    }
   } finally {
     submitBtn.disabled = false;
   }
@@ -589,11 +850,11 @@ function readForm() {
   return {
     company: (fd.get('company') || '').trim(),
     industry: (fd.get('industry') || '').trim(),
-    currentSetup: (fd.get('currentSetup') || '').trim(),
-    impact: (fd.get('impact') || '').trim(),
-    systems: (fd.get('systems') || '').trim(),
-    outcomes: (fd.get('outcomes') || '').trim(),
-    reporting: (fd.get('reporting') || '').trim(),
+    currentSetup: fd.getAll('currentSetup').join(', '),
+    impact: fd.getAll('impact').join(', '),
+    systems: fd.getAll('systems').join(', '),
+    outcomes: fd.getAll('outcomes').join(', '),
+    reporting: fd.getAll('reporting').join(', '),
     repName: (fd.get('repName') || '').trim(),
     repTitle: (fd.get('repTitle') || '').trim(),
     repEmail: (fd.get('repEmail') || '').trim(),
@@ -619,7 +880,7 @@ function slug(s) {
 /* =========================================================
    DOCX BUILDER
    ========================================================= */
-async function buildDocx(d) {
+async function buildDocx(d, prose) {
   const D = window.docx;
   if (!D) throw new Error('docx library failed to load');
 
@@ -654,7 +915,7 @@ async function buildDocx(d) {
         children: [
           new D.TableCell({
             shading: { fill: PAE_BLUE, type: D.ShadingType.CLEAR, color: 'auto' },
-            margins: { top: 220, bottom: 220, left: 280, right: 280 },
+            margins: { top: 140, bottom: 140, left: 240, right: 240 },
             children: [
               new D.Paragraph({
                 children: [new D.TextRun({
@@ -675,18 +936,18 @@ async function buildDocx(d) {
   // Two-column challenge | solution table
   const challengeSolutionTable = (challenge, solution) => new D.Table({
     width: { size: 100, type: D.WidthType.PERCENTAGE },
-    columnWidths: [4500, 4500],
+    columnWidths: [7300, 7300],
     borders: noBorders(),
     rows: [
       new D.TableRow({
         children: [
           new D.TableCell({
-            margins: { top: 200, bottom: 80, left: 0, right: 200 },
+            margins: { top: 120, bottom: 60, left: 0, right: 160 },
             children: [pillLabel('THE CHALLENGE', PAE_BLUE, WHITE)],
             borders: noCellBorders()
           }),
           new D.TableCell({
-            margins: { top: 200, bottom: 80, left: 200, right: 0 },
+            margins: { top: 120, bottom: 60, left: 160, right: 0 },
             children: [pillLabel('HOW PRTG SOLVES IT', PAE_CYAN, WHITE)],
             borders: noCellBorders()
           })
@@ -695,7 +956,7 @@ async function buildDocx(d) {
       new D.TableRow({
         children: [
           new D.TableCell({
-            margins: { top: 60, bottom: 200, left: 0, right: 200 },
+            margins: { top: 60, bottom: 120, left: 0, right: 160 },
             children: [
               new D.Paragraph({
                 children: [text(challenge, { size: 22 })],
@@ -705,7 +966,7 @@ async function buildDocx(d) {
             borders: noCellBorders()
           }),
           new D.TableCell({
-            margins: { top: 60, bottom: 200, left: 200, right: 0 },
+            margins: { top: 60, bottom: 120, left: 160, right: 0 },
             children: [
               new D.Paragraph({
                 children: [text(solution, { size: 22, bold: true })],
@@ -743,7 +1004,7 @@ async function buildDocx(d) {
         children: [
           new D.TableCell({
             shading: { fill: PAE_GREY, type: D.ShadingType.CLEAR, color: 'auto' },
-            margins: { top: 220, bottom: 220, left: 320, right: 320 },
+            margins: { top: 140, bottom: 140, left: 240, right: 240 },
             children: [
               new D.Paragraph({
                 children: [new D.TextRun({
@@ -784,12 +1045,14 @@ async function buildDocx(d) {
   const pageBreakPara = () => new D.Paragraph({ children: [new D.PageBreak()] });
 
   // Build cover page ---------------------------------------
-  const execSummary = composeExecSummary(d);
+  // Use AI-generated prose if available, fall back to template engine
+  const execSummary = (prose && prose.execParagraphs) ? prose.execParagraphs : composeExecSummary(d);
+  const closingStatementText = (prose && prose.closing) ? prose.closing : composeClosingStatement(d);
 
   const coverChildren = [
     // Brand strip (dark blue band) at top with "PAESSLER"
     brandBar(D, PAE_BLUE, PAE_CYAN, WHITE),
-    spacer(400),
+    spacer(200),
     // Eyebrow
     para(
       [text('EXECUTIVE BRIEF', { color: PAE_CYAN, bold: true, size: 28 })],
@@ -797,75 +1060,53 @@ async function buildDocx(d) {
     ),
     // Big title
     para(
-      [text(`PRTG Network Monitor for ${d.company}`, { size: 56, color: PAE_BLUE })],
-      { align: D.AlignmentType.LEFT, spacing: { before: 0, after: 160 } }
+      [text(`PRTG Network Monitor for ${d.company}`, { size: 52, color: PAE_BLUE })],
+      { align: D.AlignmentType.LEFT, spacing: { before: 0, after: 100 } }
     ),
     // Cyan rule
     cyanRule(D, PAE_CYAN),
-    spacer(240),
+    spacer(120),
     // Industry tag
     para(
       [text(d.industry.toUpperCase(), { bold: true, color: PAE_CYAN, size: 20 })],
-      { spacing: { before: 0, after: 200 } }
+      { spacing: { before: 0, after: 140 } }
     ),
-    // Executive summary
-    para([text(execSummary, { size: 24 })], { spacing: { before: 0, after: 240 } }),
+    // Executive summary — 3 narrative paragraphs
+    ...execSummary.map((p, i) => para([text(p, { size: 22 })], { spacing: { before: 0, after: i < execSummary.length - 1 ? 140 : 160 } })),
   ];
 
-  // Optional context blocks
-  const contextRows = [];
-  if (d.currentSetup) contextRows.push(['CURRENT MONITORING SETUP', d.currentSetup]);
-  if (d.systems) contextRows.push(['KEY SYSTEMS & SERVICES', d.systems]);
-  if (d.reporting) contextRows.push(['REPORTING & ALERTING NEEDS', d.reporting]);
-
-  if (contextRows.length) {
-    coverChildren.push(spacer(200));
-    contextRows.forEach(([k, v]) => {
-      coverChildren.push(
-        para([text(k, { color: PAE_CYAN, bold: true, size: 16 })], { spacing: { before: 0, after: 40 } }),
-        para([text(v, { size: 22 })], { spacing: { before: 0, after: 200 } })
-      );
-    });
-  }
-
-  // Build problem pages ------------------------------------
+  // Build problem sections — flow continuously, no brand bars (cover has the header)
   const problemChildren = [];
   d.pains.forEach((p, idx) => {
-    problemChildren.push(pageBreakPara());
-    problemChildren.push(brandBar(D, PAE_BLUE, PAE_CYAN, WHITE));
-    problemChildren.push(spacer(360));
+    problemChildren.push(spacer(280));
     problemChildren.push(sectionHeaderBar(p.title));
-    problemChildren.push(spacer(280));
+    problemChildren.push(spacer(140));
     problemChildren.push(challengeSolutionTable(p.challenge, p.solution));
-    problemChildren.push(spacer(280));
+    problemChildren.push(spacer(140));
     problemChildren.push(industryContextBlock(d.industry, p.industryContext));
   });
 
-  // Build closing page -------------------------------------
+  // Closing section — forced to its own last page
   const closingChildren = [
-    pageBreakPara(),
+    new D.Paragraph({ children: [new D.PageBreak()] }),
     brandBar(D, PAE_BLUE, PAE_CYAN, WHITE),
-    spacer(600),
+    spacer(200),
     para(
-      [text("Let's Get Started", { color: PAE_CYAN, size: 56 })],
-      { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 80 } }
+      [text("Let's Get Started", { color: PAE_CYAN, size: 44 })],
+      { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 60 } }
     ),
     centeredCyanRule(D, PAE_CYAN),
-    spacer(400),
+    spacer(160),
   ];
 
-  if (d.outcomes) {
-    closingChildren.push(
-      para([text('YOUR DESIRED OUTCOMES', { color: PAE_CYAN, bold: true, size: 16 })],
-        { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 60 } }),
-      para([text(d.outcomes, { size: 22 })],
-        { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 320 } })
-    );
-  }
+  closingChildren.push(
+    para([text(closingStatementText, { size: 22 })],
+      { align: D.AlignmentType.CENTER, spacing: { before: 0, after: 160 } })
+  );
 
   // Rep card
   closingChildren.push(repCard(D, d, PAE_BLUE, PAE_CYAN, WHITE));
-  closingChildren.push(spacer(400));
+  closingChildren.push(spacer(140));
 
   // Quote link
   if (d.quoteLink) {
@@ -939,8 +1180,8 @@ async function buildDocx(d) {
     sections: [{
       properties: {
         page: {
-          margin: { top: 720, right: 720, bottom: 720, left: 720 }, // 0.5"
-          size: { orientation: D.PageOrientation.PORTRAIT }
+          margin: { top: 560, right: 900, bottom: 560, left: 900 }, // ~0.39" top/bottom, ~0.625" sides
+          size: { orientation: D.PageOrientation.LANDSCAPE, width: 16838, height: 11906 } // A4 landscape
         }
       },
       headers: {},
@@ -1074,27 +1315,195 @@ function emptyCellBorders(D) {
 }
 
 /* =========================================================
-   Compose executive summary from form fields
+   PROSE ENGINE
+   ========================================================= */
+
+const TOOL_LABELS = {
+  'SolarWinds NPM': 'SolarWinds NPM',
+  'WhatsUp Gold': 'WhatsUp Gold',
+  'Microsoft SCOM': 'Microsoft SCOM',
+  'Nagios': 'Nagios',
+  'Zabbix': 'Zabbix',
+  'Prometheus / Grafana': 'Prometheus and Grafana',
+  'Auvik': 'Auvik',
+  'Datadog': 'Datadog',
+  'Dynatrace': 'Dynatrace',
+  'ManageEngine OpManager': 'ManageEngine OpManager',
+  'Vendor-specific tools (Cisco, HPE, Juniper, etc.)': 'vendor-specific management consoles',
+  'Custom scripts / manual checklists': 'custom scripts and manual checklists'
+};
+const TOOL_WEAKNESS = {
+  'SolarWinds NPM': 'carries escalating licensing costs and has struggled to keep pace with hybrid and cloud environments',
+  'WhatsUp Gold': 'provides limited depth beyond basic network availability and lacks unified cloud and server visibility',
+  'Microsoft SCOM': 'is complex to maintain, requires significant engineering investment, and is narrow in scope outside the Microsoft stack',
+  'Nagios': 'demands constant engineering upkeep, lacks modern dashboards, and has no enterprise-grade reporting capability',
+  'Zabbix': 'requires deep technical expertise to operate, has limited out-of-box integrations, and slows as environments scale',
+  'Prometheus / Grafana': 'requires significant configuration effort, provides limited historical data by default, and is primarily designed for developers rather than IT operations teams',
+  'Auvik': 'is focused primarily on network topology and lacks the depth needed for server, application, and OT monitoring',
+  'Datadog': 'carries high per-host cost at scale and is better suited for cloud-native workloads than traditional on-premises infrastructure',
+  'Dynatrace': 'is designed for application performance monitoring and cloud-native environments, leaving gaps in network, OT, and physical infrastructure visibility',
+  'ManageEngine OpManager': 'provides adequate network monitoring but lacks depth in cloud, OT, and environmental monitoring, and can be difficult to scale across large multi-site environments',
+  'Vendor-specific tools (Cisco, HPE, Juniper, etc.)': 'cover only their own hardware and leave blind spots every time a new device or workload from a different vendor enters the environment',
+  'Custom scripts / manual checklists': 'are brittle, unscalable, and create coverage gaps&�he moment someone is unavailable or the environment changes'
+};
+
+function describeEnvironment(systemsStr) {
+  if (!systemsStr) return 'IT infrastructure';
+  const s = systemsStr.split(',').map(x => x.trim());
+  const has = (kw) => s.some(x => x.toLowerCase().includes(kw.toLowerCase()));
+  if (has('Medical')) return 'clinical IT environment spanning medical devices, network infrastructure, and hospital systems';
+  if (has('OT') || has('SCADA') || has('industrial')) {
+    if (has('Cloud') || has('Network') || has('Servers')) return 'converged IT/OT environment spanning operational technology, network, and compute infrastructure';
+    return 'operational technology environment including SCADA systems, PLCs, and industrial control infrastructure';
+  }
+  if (has('Cloud') && (has('Network') || has('Servers'))) return 'hybrid IT environment spanning on-premises network, compute, and cloud workloads';
+  if (has('Remote')) return 'distributed multi-site IT infrastructure spanning headquarters and remote locations';
+  if (has('IoT') && has('Environmental')) return 'distributed physical and digital infrastructure including IoT-connected devices and environmental monitoring';
+  if (has('Network') && has('Servers') && has('Applications')) return 'full-stack IT environment from network and compute through to the application layer';
+  if (has('Network') && has('Servers')) return 'core IT infrastructure spanning network, servers, and virtualization';
+  return 'IT and operational infrastructure';
+}
+
+function describeToolSituation(toolsStr) {
+  if (!toolsStr) return null;
+  const tools = toolsStr.split(',').map(s => s.trim()).filter(Boolean);
+  if (tools.some(t => t.includes('No formal'))) {
+    return 'Without a formal monitoring platform in place, the team has limited proactive visibility and typically learns about problems from end users rather than from the infrastructure itself.';
+  }
+  const real = tools.filter(t => !t.includes('Other') && !t.includes('not sure') && TOOL_LABELS[t]);
+  if (real.length === 0) return null;
+  if (real.length === 1) {
+    return `Today, the team relies on ${TOOL_LABELS[real[0]]} — tools that ${TOOL_WEAKNESS[real[0]]}.`;
+  }
+  const labels = real.map(t => TOOL_LABELS[t]);
+  const toolPhrase = labels.slice(0, -1).join(', ') + ', and ' + labels[labels.length - 1];
+  const weakness = TOOL_WEAKNESS[real[0]] || 'were not designed to work together and create critical visibility gaps';
+  return `Today, the team operates across ${toolPhrase} — a fragmented approach that ${weakness}.`;
+}
+
+function describeRisk(impactStr) {
+  if (!impactStr) return null;
+  const IMPACT_PHRASES = {
+    'Customers or end users discover outages before IT does': 'end users discovering outages before the IT team can respond',
+    'Production or operations halt due to IT failure': 'unplanned production or operational stoppages',
+    'Patient safety or clinical service at risk': 'risk to patient safety and clinical service continuity',
+    'Revenue loss or SLA penalty exposure': 'direct revenue loss and SLA penalty exposure',
+    'Regulatory or compliance audit failure': 'compliance failures that create regulatory exposure',
+    'Security incident or data loss': 'undetected security incidents and potential data loss',
+    'Physical damage to hardware, stock, or fquipment': 'physical damage to hardware, stock, or critical equipment',
+    'IT team stuck in manual daily checks instead of strategic work': 'skilled IT staff consumed by repetitive manual tasks rather than strategic priorities',
+    'Hours spent finding root cause during incidents': 'hours lost chasing root cause during every major incident',
+    'Unable to justify IT budget or prove value to leadership': 'the inability to demonstrate IT value or justify spend to executive leadership'
+  };
+  const phrases = impactStr.split(',').map(s => s.trim()).filter(Boolean).map(i => IMPACT_PHRASES[i] || i).filter(Boolean);
+  if (phrases.length === 0) return null;
+  if (phrases.length === 1) return phrases[0];
+  if (phrases.length === 2) return `${phrases[0]} and ${phrases[1]}`;
+  return phrases.slice(0, -1).join(', ') + ', and ' + phrases[phrases.length - 1];
+}
+
+function describeOutcomes(outcomesStr) {
+  if (!outcomesStr) return null;
+  const OUTCOME_PHRASES = {
+    'Reduce unplanned downtime': 'dramatically reduce unplanned downtime',
+    'Cut mean time to resolution (MTTR)': 'cut mean time to resolution',
+    'Replace multiple monitoring tools with one': 'consolidate fragmented tools onto a single platform',
+    'Automate compliance and audit reporting': 'automate compliance and audit reporting',
+    'Prove uptime SLA to stakeholders': 'deliver on-demand SLA and uptime documentation to stakeholders',
+    'Unify IT and OT visibility': 'achieve unified IT and OT visibility in a single pane of glass',
+    'Scale monitoring as infrastructure grows': 'scale monitoring as the business and infrastructure grow',
+    'Monitor physical and environmental systems': 'extend monitoring to physical and environmental infrastructure',
+    'Enable client visibility across accounts (MSP)': 'give every client their own real-time visibility dashboard',
+    'Reduce total monitoring cost': 'reduce total monitoring cost and eliminate redundant tool spending'
+  };
+  const phrases = outcomesStr.split(',').map(s => s.trim()).filter(Boolean).map(o => OUTCOME_PHRASES[o] || o);
+  if (phrases.length === 0) return null;
+  if (phrases.length === 1) return phrases[0];
+  if (phrases.length === 2) return `${phrases[0]} and ${phrases[1]}`;
+  return phrases.slice(0, -1).join(', ') + ', and ' + phrases[phrases.length - 1];
+}
+
+function describeReporting(reportingStr) {
+  if (!reportingStr) return null;
+  const REPORT_PHRASES = {
+    'Email and SMS alerts to IT staff': 'email and SMS alerting',
+    'Microsoft Teams or Slack notifications': 'Microsoft Teams and Slack notifications',
+    'Mobile app push alerts for on-call engineers': 'mobile push alerts for on-call engineers',
+    'Automated SLA and uptime reports': 'automated SLA and uptime reporting',
+    'Compliance and audit documentation': 'compliance and audit documentation',
+    'Executive or management dashboard': 'executive dashboards',
+    'Per-site or per-client dashboards': 'per-site visibility dashboards',
+    'On-call escalation and acknowledgment workflows': 'on-call escalation workflows',
+    'Ticketing system integration (ServiceNow, ConnectWise, etc.)': 'ticketing system integration',
+    'Scheduled capacity and trend reports': 'scheduled capacity and trend reporting'
+  };
+  const phrases = reportingStr.split(',').map(s => s.trim()).filter(Boolean).map(i => REPORT_PHRASES[i] || i);
+  if (phrases.length === 0) return null;
+  if (phrases.length === 1) return phrases[0];
+  if (phrases.length === 2) return `${phrases[0]} and ${phrases[1]}`;
+  return phrases.slice(0, -1).join(', ') + ', and ' + phrases[phrases.length - 1];
+}
+
+/* =========================================================
+   Compose executive summary — returns array of 3 paragraph strings
    ========================================================= */
 function composeExecSummary(d) {
   const company = d.company || 'your organization';
-  const industry = d.industry ? d.industry.toLowerCase() : 'the business';
-  let painList = '';
-  if (d.pains.length) {
-    const verbs = d.pains.map((p) => p.title.toLowerCase());
-    if (verbs.length === 1) painList = verbs[0];
-    else if (verbs.length === 2) painList = verbs.join(' and ');
-    else painList = verbs.slice(0, -1).join(', ') + ', and ' + verbs.slice(-1);
+  const industry = d.industry || 'the industry';
+  const envDesc = describeEnvironment(d.systems);
+  const toolSentence = describeToolSituation(d.currentSetup);
+  const riskPhrase = describeRisk(d.impact);
+  const outcomesPhrase = describeOutcomes(d.outcomes);
+  const reportingPhrase = describeReporting(d.reporting);
+
+  const painTitles = d.pains.map(p => p.title.toLowerCase());
+  const painPhrase = painTitles.length === 3
+    ? `${painTitles[0]}, ${painTitles[1]}, and ${painTitles[2]}`
+    : painTitles.join(' and ');
+
+  // Paragraph 1: Who they are and what they manage
+  const p1 = `${company} operates in the ${industry.toLowerCase()} sector, managing a ${envDesc} that demands continuous, unified visibility to protect uptime, service delivery, and business continuity.`;
+
+  // Paragraph 2: The gap — tool situation + pain consequences + business risk
+  let p2 = '';
+  if (toolSentence) {
+    p2 = toolSentence + ' ';
   }
-  const impact = d.impact ? ` ${stripPeriod(d.impact)}.` : '';
-  const outcomes = d.outcomes ? ` ${stripPeriod(d.outcomes)}.` : '';
-  return [
-    `As ${industry} operations scale and the cost of downtime climbs, the current approach to infrastructure monitoring at ${company} creates risk: ${painList || 'gaps in visibility, reactive operations, and manual reporting'}.`,
-    `${impact}`,
-    ` PRTG Network Monitor by Paessler delivers the unified, proactive visibility ${company} needs to protect uptime, automate compliance, and drive measurable outcomes.${outcomes}`
-  ].join('').replace(/\s+/g, ' ').trim();
+  p2 += `The operational consequences of ${painPhrase} are not abstract risks.`;
+  if (riskPhrase) {
+    p2 += ` Left unaddressed, they directly expose the business to ${riskPhrase}.`;
+  } else {
+    p2 += ` Left unaddressed, they translate directly into downtime, delayed incident response, and avoidable cost.`;
+  }
+
+  // Paragraph 3: PRTG as the answer, tied to outcomes and reporting needs
+  let p3 = `PRTG Network Monitor by Paessler addresses each of these gaps by providing unified visibility across every layer of ${company}'s infrastructure from a single, agentless platform that deploys in days, not months.`;
+  if (outcomesPhrase && reportingPhrase) {
+    p3 += ` The result: ${outcomesPhrase}, supported by ${reportingPhrase} that keeps IT and leadership aligned without manual effort.`;
+  } else if (outcomesPhrase) {
+    p3 += ` The result: ${outcomesPhrase}, without adding headcount, complexity, or new tool sprawl.`;
+  } else if (reportingPhrase) {
+    p3 += ` Built-in ${reportingPhrase} ensures every stakeholder has the visibility they need without manual effort.`;
+  }
+
+  return [p1, p2, p3];
 }
-function stripPeriod(s) { return (s || '').trim().replace(/[.!?]$/, ''); }
+
+/* =========================================================
+   Compose closing page commitment statement
+   ========================================================= */
+function composeClosingStatement(d) {
+  const company = d.company || 'your organization';
+  const outcomesPhrase = describeOutcomes(d.outcomes);
+  let statement = '';
+  if (outcomesPhrase) {
+    statement = `The goals are clear: ${outcomesPhrase}. PRTG is purpose-built to deliver exactly that, and ${company}'s team can be up and running in days, not months, with full support from Paessler at every step.`;
+  } else {
+    statement = `The next step is a live demonstration configured around ${company}'s specific environment and requirements. PRTG deploys in days, not months, and your Paessler team will be with you throughout.`;
+  }
+  statement += ' Reach out to schedule your personalized walkthrough and see the value firsthand.';
+  return statement;
+}
 </script>
 
 </body>
